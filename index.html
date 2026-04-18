@@ -44,7 +44,7 @@
 
         .logo {
             font-family: 'Orbitron', sans-serif;
-            font-size: 28px;
+            font-size: 46px;
             font-weight: 900;
             color: #00d9ff;
             text-shadow:
@@ -332,6 +332,122 @@
             background: transparent;
             width: 100%;
             height: 100%;
+        }
+
+        /* ===================== INLINE CARDS ===================== */
+        .inline-cards-section {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            padding: 12px 20px 12px;
+            background: transparent;
+            flex-wrap: wrap;
+        }
+
+        .inline-card {
+            cursor: pointer;
+            position: relative;
+            user-select: none;
+            width: 150px;
+            background: linear-gradient(160deg, rgba(5,15,30,0.92) 0%, rgba(0,30,45,0.88) 100%);
+            border: 1px solid rgba(0,217,255,0.35);
+            clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
+            padding: 18px 12px 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 7px;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .inline-card::before {
+            content: '';
+            position: absolute;
+            top: 0; right: 0;
+            width: 12px; height: 12px;
+            background: rgba(0,217,255,0.35);
+            clip-path: polygon(0 0, 100% 0, 100% 100%);
+            transition: background 0.3s ease;
+        }
+
+        .inline-card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0,217,255,0.12), transparent);
+        }
+
+        .inline-card:hover::after {
+            left: 200%;
+            transition: left 0.6s ease;
+        }
+
+        .inline-card:hover {
+            border-color: rgba(0,217,255,0.7);
+            background: linear-gradient(160deg, rgba(0,20,40,0.98) 0%, rgba(0,50,70,0.9) 100%);
+            box-shadow: 0 0 30px rgba(0,217,255,0.25), inset 0 0 20px rgba(0,217,255,0.05);
+            transform: translateY(-4px);
+        }
+
+        .inline-card:hover::before {
+            background: rgba(0,217,255,0.75);
+        }
+
+        .inline-card-icon {
+            font-size: 36px;
+            line-height: 1;
+            filter: drop-shadow(0 0 6px rgba(0,217,255,0.4));
+            transition: all 0.3s ease;
+        }
+
+        .inline-card:hover .inline-card-icon {
+            filter: drop-shadow(0 0 14px rgba(0,255,255,0.9));
+            transform: scale(1.15);
+        }
+
+        .inline-card-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.8);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .inline-card:hover .inline-card-label {
+            color: #00d9ff;
+        }
+
+        .inline-card-sub {
+            font-size: 8px;
+            color: rgba(0,217,255,0.65);
+            letter-spacing: 0.5px;
+            text-align: center;
+            font-family: 'Orbitron', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .inline-card:hover .inline-card-sub {
+            color: rgba(0,217,255,0.85);
+        }
+
+        .inline-card-bar {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00d9ff, transparent);
+            transform: scaleX(0);
+            transition: transform 0.35s ease;
+        }
+
+        .inline-card:hover .inline-card-bar {
+            transform: scaleX(1);
         }
 
         /* ===================== OVERLAY ===================== */
@@ -750,14 +866,38 @@
 
             /* Globo ocupa área abaixo da navbar */
             .canvas-container {
-                height: 100vh;
-                height: 100dvh;
+                height: calc(100vh - 100px);
+                height: calc(100dvh - 100px);
             }
 
             #globeCanvas {
                 width: 100vw;
-                height: 100vh;
-                height: 100dvh;
+                height: 100%;
+            }
+
+            .inline-cards-section {
+                gap: 10px;
+                padding: 16px 10px 50px;
+            }
+
+            .inline-card {
+                width: calc(33.33% - 10px);
+                max-width: 130px;
+                padding: 12px 6px 10px;
+                gap: 5px;
+            }
+
+            .inline-card-icon {
+                font-size: 26px;
+            }
+
+            .inline-card-label {
+                font-size: 8px;
+                letter-spacing: 0.5px;
+            }
+
+            .inline-card-sub {
+                display: none;
             }
 
             /* Painel de conteúdo mobile */
@@ -911,7 +1051,7 @@
             <ul class="nav-menu">
                 <li class="nav-item" data-section="sobre">
                     <div class="nav-item-icon">🛡️</div>
-                    <div class="nav-item-label">Sobre Nós</div>
+                    <div class="nav-item-label">ANPLASEC</div>
                     <div class="nav-item-sub">QUEM SOMOS</div>
                     <div class="nav-item-bar"></div>
                 </li>
@@ -984,7 +1124,7 @@
         const contentData = {
             sobre: {
                 content: `
-                    <h2>Sobre o Projeto</h2>
+                    <h2>SOBRE NÓS</h2>
                     <p>A <strong>ANPLASEC</strong> é um projeto pessoal de consultoria em cibersegurança, com foco em pessoas físicas, pequenas e médias empresas que querem se proteger de verdade — sem complicação e burocracia.</p>
                     <p>Entendemos que cada situação é única. Por isso, estamos aqui para ouvir, orientar e agir junto com você — do jeito que faz sentido para a sua realidade, no seu tempo.</p>
 
@@ -996,14 +1136,6 @@
                         <div class="stat-badge">
                             <div class="stat-number">IR</div>
                             <div class="stat-label">Resposta a Incidentes</div>
-                        </div>
-                        <div class="stat-badge">
-                            <div class="stat-number">72h</div>
-                            <div class="stat-label">Tempo médio de retorno</div>
-                        </div>
-                        <div class="stat-badge">
-                            <div class="stat-number">24h</div>
-                            <div class="stat-label">Tempo médio de retorno para urgências</div>
                         </div>
                     </div>
 
@@ -1019,39 +1151,9 @@
                     <div style="display:flex; gap:20px; align-items:flex-start; flex-wrap:wrap; margin-bottom:20px;">
                         <div style="flex:1; min-width:220px;">
                             <p style="margin-bottom:10px;"><strong style="color:#00ffff; font-size:17px;">Guilherme</strong></p>
-                            <p>40 anos, cresci vendo meu pai programar — a tecnologia sempre fez parte da minha vida, muito antes de virar profissão. Usuário Linux desde 2001, quando a maioria ainda nem sabia que ele existia.</p>
+                            <p>Tenho 40 anos, cresci vendo meu pai programar — a tecnologia sempre fez parte da minha vida, muito antes de virar profissão. Usuário Linux desde 2001, quando a maioria ainda nem sabia que ele existia.</p>
                             <p>Sou formado em <strong>Cibersegurança pela Anhanguera</strong> e ao longo dos anos fui construindo um conhecimento prático que vai além do currículo. Com certificações em softwares e frameworks de cibersegurança e cursos certificados pela <strong>Solyd Offensive Security</strong> — considerada a maior escola de segurança ofensiva da América latina.</p>
                             <p>A ANPLASEC nasceu de uma vontade simples: colocar esse conhecimento a serviço de quem precisa, com honestidade, clareza e sem enrolação.</p>
-                        </div>
-                    </div>
-
-                    <div class="service-cards" style="grid-template-columns: repeat(3, 1fr);">
-                        <div class="service-card" style="cursor:default;">
-                            <div class="service-card-header">
-                                <div class="service-card-icon">🎓</div>
-                                <h4>Formação</h4>
-                            </div>
-                            <div class="service-card-body" style="max-height:none; padding: 0 18px 14px;">
-                                <p>Cibersegurança — Anhanguera</p>
-                            </div>
-                        </div>
-                        <div class="service-card" style="cursor:default;">
-                            <div class="service-card-header">
-                                <div class="service-card-icon">🛠️</div>
-                                <h4>Ferramentas</h4>
-                            </div>
-                            <div class="service-card-body" style="max-height:none; padding: 0 18px 14px;">
-                                <p>Alta gama de softwares<br>e frameworks de<br>cibersegurança</p>
-                            </div>
-                        </div>
-                        <div class="service-card" style="cursor:default;">
-                            <div class="service-card-header">
-                                <div class="service-card-icon">🐧</div>
-                                <h4>Linux</h4>
-                            </div>
-                            <div class="service-card-body" style="max-height:none; padding: 0 18px 14px;">
-                                <p>Usuário avançado<br>desde 2001</p>
-                            </div>
                         </div>
                     </div>
 
@@ -1173,7 +1275,7 @@
             earthGroup.scale.setScalar(globeScale);
 
             camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            camera.position.set(0, 0, isMobile ? 18 : 15);
+            camera.position.set(0, 0, isMobile ? 22 : 20);
 
             const canvas = document.getElementById('globeCanvas');
             renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
@@ -1840,6 +1942,16 @@
                 check.style.background = 'transparent';
                 if (field) field.value = 'Não';
             }
+        };
+
+        // ============================================================
+        // CARDS INLINE — trigger de seção
+        // ============================================================
+        window.triggerSection = function(section) {
+            // Simula o clique no nav-item equivalente para manter a lógica de beam
+            const navItems = document.querySelectorAll('.nav-item');
+            // Fallback: abre conteúdo diretamente
+            showContent(section);
         };
 
         // ============================================================
